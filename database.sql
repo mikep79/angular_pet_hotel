@@ -1,0 +1,7 @@
+CREATE TABLE pets (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(200),
+	breed VARCHAR(200),
+	color VARCHAR(200),
+	checked BOOLEAN
+);

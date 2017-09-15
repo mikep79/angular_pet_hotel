@@ -8,9 +8,9 @@ To-do:
 - [x] client side ajax calls. POST and GET calls client and server side.
 - [x] create button listener, grab inputs
 - [x] HTML input fields and buttons!!
-- [ ] set up database. 
-- [ ] Append info to DOM.
-- [ ] Ajax DELETE call.
+- [x] set up database. 
+- [x] Append info to DOM.
+- [x] Ajax DELETE call.
 
 # CRUD Up Pet Hotel
 

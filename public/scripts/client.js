@@ -3,6 +3,7 @@ $(document).ready(onReady);
 function onReady(){
     getPet();
     $('#addButton').on('click', addPet);
+    $('#allPets').on('click', ".deleteMe", deletePet)
 }
 
 function getPet (){
@@ -15,6 +16,7 @@ function getPet (){
             $('#allPets').empty();
             for(var i = 0; i < response.length; i++){
                 var pet = response[i];
+                console.log('line 19 of GET PET', pet)
                 var $row = $('<tr></tr>');
 
                 $row.append('<td>' + pet.name + '</td>');
@@ -22,6 +24,8 @@ function getPet (){
                 $row.append('<td>' + pet.color + '</td>');
                 $row.append('<td>' + pet.checked + '</td>');
 
+                var $deleteButton =$('<td><button class="deleteMe" data-id="' + pet.id + '">Remove</button></td>');
+                $row.append($deleteButton);
                 $('#allPets').append($row);
             };
         }
@@ -39,10 +43,25 @@ function addPet(){
     $('#breedIn').val('');
     $('#colorIn').val('');
     $('#checkedIn').val('');
+
     $.ajax({
         method: 'POST',
         url: '/pets',
         data: objectToSend,
+        success: function(response){
+            console.log('ajax post pet', response);
+            getPet();
+        }
+    })
+}
+
+function deletePet(){
+    var thisId = $(this).data('id');
+    console.log('insidedeletePet row 60',thisId);
+
+    $.ajax({
+        method: 'DELETE',
+        url: '/pets/' + thisId,
         success: function(response){
             console.log('ajax post pet', response);
             getPet();
