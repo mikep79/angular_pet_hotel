@@ -3,10 +3,11 @@ To-do:
 	 public -> vendors -> jquery + (bootstrap),  public -> server.js, routes -> pool.js + 
 	 route.js + index.js, .sql file. Source in.
 - [x] NPM init, install dependencies. (body-parser, express, pg). 
-- [ ] Spin up server, require path., require index route to index.js.
-- [ ] Add pets routes. 
-- [ ] client side ajax calls. POST and GET calls client and server side.
-- [ ] HTML input fields and buttons!!
+- [x] Spin up server, require path., require index route to index.js.
+- [x] Add pets routes. 
+- [x] client side ajax calls. POST and GET calls client and server side.
+- [x] create button listener, grab inputs
+- [x] HTML input fields and buttons!!
 - [ ] set up database. 
 - [ ] Append info to DOM.
 - [ ] Ajax DELETE call.

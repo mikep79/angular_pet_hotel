@@ -5,11 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pets! :D</title>
-    <script src='vendors/jquery-3.2.1.min.js'></script>
-    <script src='scripts/client.js'></script>
+    <script src="vendors/jquery-3.2.1.min.js"></script>
+    <script src="scripts/client.js"></script>
 </head>
 <body>
     <h1>Pets</h1>
+        <main>
+            <div id="inputDiv">
+                <input type="text", id="nameIn", placeholder="Name">
+                <input type="text", id="breedIn", placeholder="Breed">
+                <input type="text", id="colorIn", placeholder="Color">
+                <input type="text", id="checkedIn", placeholder="Checked In?">
+                <button id="addButton">Add</button>
+            </div>
+            <div id="displayDiv">
+                <table id="petList">
+                    <thead>
+                        <th>Name</th>
+                        <th>Breed</th>
+                        <th>Color</th>
+                        <th>Check-In Status</th>
+                        <th>Delete</th>    
+                    </thead>
+                    <tbody id="allPets">
+                    </tbody>
+                </table>
+            </div>
+            
+            
+
+        
+    </main>
     
 </body>
 </html>
