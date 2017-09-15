@@ -12,6 +12,7 @@ function getPet (){
         url: '/pets',
         success: function(response){
             console.log('ajax get pet',response);
+            $('#allPets').empty();
             for(var i = 0; i < response.length; i++){
                 var pet = response[i];
                 var $row = $('<tr></tr>');
@@ -34,7 +35,10 @@ function addPet(){
         color: $('#colorIn').val(),
         checked: $('#checkedIn').val()
     }
-
+    $('#nameIn').val('');                   // clear input values
+    $('#breedIn').val('');
+    $('#colorIn').val('');
+    $('#checkedIn').val('');
     $.ajax({
         method: 'POST',
         url: '/pets',
