@@ -1,0 +1,26 @@
+{
+  "name": "Pet-Hotel-Single-Table",
+  "version": "1.0.0",
+  "description": "To-do:  - [x] Create file tree: public -> views -> index.html,  public-> scripts -> client.jss, \t public -> vendors -> jquery + (bootstrap),  public -> server.js, routes -> pool.js +  \t route.js + index.js, .sql file. Source in. - [ ]  - [ ] NPM init, install dependencies. (body-parser, express, pg). require path. - [ ]",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikep79/Pet-Hotel-Single-Table.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikep79/Pet-Hotel-Single-Table/issues"
+  },
+  "homepage": "https://github.com/mikep79/Pet-Hotel-Single-Table#readme",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "pg": "^7.3.0"
+  }
+}

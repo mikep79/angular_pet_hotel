@@ -1,3 +1,16 @@
+To-do: 
+- [x] Create file tree: public -> views -> index.html,  public-> scripts -> client.jss,
+	 public -> vendors -> jquery + (bootstrap),  public -> server.js, routes -> pool.js + 
+	 route.js + index.js, .sql file. Source in.
+- [x] NPM init, install dependencies. (body-parser, express, pg). 
+- [ ] Spin up server, require path., require index route to index.js.
+- [ ] Add pets routes. 
+- [ ] client side ajax calls. POST and GET calls client and server side.
+- [ ] HTML input fields and buttons!!
+- [ ] set up database. 
+- [ ] Append info to DOM.
+- [ ] Ajax DELETE call.
+
 # CRUD Up Pet Hotel
 
 Your team has started a new business in Uptown for pet-enthusiasts that also need to vacation without their beloved pets.
