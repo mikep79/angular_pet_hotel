@@ -33,15 +33,12 @@
                             <td>{{pet.breed}}</td>
                             <td>{{pet.color}}</td>
                             <td>{{pet.checked}}</td>
-                            <td><button ng-click="PC.checkPet(pet)">Check</button></td>
+                            <td><button ng-click="PC.checkPet(pet)">{{PC.toggleText(pet.checked)}}</button></td>
                             <td><button ng-click="PC.removePet(pet.id)">Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            
-            
-
         
     </main>
     

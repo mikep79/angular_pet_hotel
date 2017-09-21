@@ -5,6 +5,15 @@ myApp.controller('PetController', function($http){
     console.log('NG');
     var vm = this;
     vm.pets = [];
+
+    vm.toggleText= function (checked) {
+        if (checked) {
+            return 'Check Out';
+        } else {
+            return 'Check In';
+        }
+    };
+
     vm.getPets = function(){
         $http({
             method: 'GET',
