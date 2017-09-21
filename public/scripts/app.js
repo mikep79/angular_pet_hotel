@@ -29,4 +29,14 @@ myApp.controller('PetController', function($http){
             vm.getPets();
         })
     }
+
+    vm.removePet = function(petId){
+        console.log('pet id:', petId);
+        $http({
+            method: 'DELETE',
+            url: '/pets/' + petId,
+        }).then(function(res) {
+            vm.getPets();
+        })
+    }
 });
