@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Angular Pet hotel!</title>
+    <script src="vendors/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+</head>
+<body ng-app='myApp'>
+        <h1>Pets</h1>
+        <main ng-controller='PetController as PC'>
+            <div id="inputDiv">
+                <input type="text", id="nameIn", placeholder="Name">
+                <input type="text", id="breedIn", placeholder="Breed">
+                <input type="text", id="colorIn", placeholder="Color">
+                <input type="text", id="checkedIn", placeholder="Checked In?">
+                <button id="addButton">Add</button>
+            </div>
+            <div id="displayDiv">
+                <table id="petList">
+                    <thead>
+                        <th>Name</th>
+                        <th>Breed</th>
+                        <th>Color</th>
+                        <th>Check-In Status</th>
+                        <th>Delete</th>    
+                    </thead>
+                    <tbody id="allPets">
+                    </tbody>
+                </table>
+            </div>
+            
+            
+
+        
+    </main>
+    
+</body>
+</html>
