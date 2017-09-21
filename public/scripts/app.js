@@ -39,4 +39,15 @@ myApp.controller('PetController', function($http){
             vm.getPets();
         })
     }
+
+    vm.checkPet = function(pet){
+        pet.checked = !pet.checked;
+        $http({
+            method: 'PUT',
+            url: '/pets/' + pet.id,
+            data: pet
+        }).then(function(res){
+            vm.getPets();
+        })
+    }
 });

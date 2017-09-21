@@ -61,5 +61,29 @@ router.delete('/:id', function(req,res){
             }) ;
         }
     }
-)}); 
+)});
+
+router.put('/:id', function (req, res) {
+    console.log('in the pets post', req.body);
+    var newPet= req.body;
+    var petId = req.params.id;
+    pool.connect(function (conErr, client, done){
+        if (conErr){
+            console.log(conErr);
+            res.sendStatus(500);
+        } else {
+            console.log('no connection error');
+            var queryString = 'UPDATE pets SET name = $1, breed = $2, color = $3, checked = $4 WHERE id = $5;';
+            client.query(queryString, [newPet.name, newPet.breed, newPet.color, newPet.checked, petId], function(queryErr, resultObj) {
+                done();
+                if (queryErr) {
+                    res.sendStatus(500)
+                 } else {
+                    res.sendStatus(201)
+                 }
+            });
+        }
+    })
+});
+
 module.exports = router;
