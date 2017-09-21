@@ -8,7 +8,8 @@ router.get('/', function (req, res) {
             console.log(conErr);
             res.sendStatus(500);
         } else {
-            client.query('SELECT * FROM pets;', function (queryErr, resultObj){
+            var queryString = 'SELECT * FROM owners JOIN owners_pets ON owners.id = owners_pets.owner_id JOIN pets ON pets.id = owners_pets.pet_id;';
+            client.query(queryString, function (queryErr, resultObj){
                 done();
                 if (queryErr){
                     console.log(queryErr);

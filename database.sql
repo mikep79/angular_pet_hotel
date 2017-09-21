@@ -5,3 +5,24 @@ CREATE TABLE pets (
 	color VARCHAR(200),
 	checked BOOLEAN
 );
+
+CREATE TABLE visits (
+id SERIAL PRIMARY KEY,
+check_in TIMESTAMP default CURRENT_TIMESTAMP,
+check_out TIMESTAMP,
+pet_id INT,
+FOREIGN KEY (pet_id) REFERENCES pets(id)
+);
+
+CREATE TABLE owners (
+id SERIAL PRIMARY KEY,
+first_name VARCHAR(200),
+last_name VARCHAR(200)
+);
+
+CREATE TABLE owners_pets (
+owner_id INT,
+pet_id INT,
+FOREIGN KEY (owner_id) REFERENCES owners(id),
+FOREIGN KEY (pet_id) REFERENCES pets(id)
+);

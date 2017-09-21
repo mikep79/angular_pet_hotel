@@ -11,30 +11,45 @@
 <body ng-app='myApp'>
         <h1>Pets</h1>
         <main ng-controller='PetController as PC'>
+            <section id="ownerRegistration">
+                <h2>Owner Registration</h2>
+                <input type="text" id="ownerFirst" placeholder="First Name" ng-model="PC.first_name">
+                <input type="text" id="ownerFirst" placeholder="Last Name" ng-model="PC.last_name">
+                <button id="registerButton" ng-click="PC.addOwner()">Register</button>
+                </section>
+            <section id="newPets">
+                <h2>Pets</h2>
             <div id="inputDiv">
+                <select>
+                    <option ng-repeat="owner in PC.owners">{{ owner }}</option>
+                </select>
                 <input type="text", id="nameIn", placeholder="Name" ng-model="PC.name">
                 <input type="text", id="breedIn", placeholder="Breed" ng-model="PC.breed">
                 <input type="text", id="colorIn", placeholder="Color" ng-model="PC.color">
                 <input type="text", id="checkedIn", placeholder="Checked In?" ng-model="PC.checked">
                 <button id="addButton" ng-click="PC.addPet()">Add</button>
             </div>
+            </section>
             <div id="displayDiv">
                 <table id="petList">
                     <thead>
+                        <th>Owner</th>
                         <th>Name</th>
                         <th>Breed</th>
                         <th>Color</th>
-                        <th>Check-In Status</th>
-                        <th>Delete</th>    
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>Check In/Out</th>    
                     </thead>
                     <tbody id="allPets">
                         <tr ng-repeat="pet in PC.pets">
+                            <td>{{pet.first_name}}</td>
                             <td>{{pet.name}}</td>
                             <td>{{pet.breed}}</td>
                             <td>{{pet.color}}</td>
-                            <td>{{pet.checked}}</td>
-                            <td><button ng-click="PC.checkPet(pet)">{{PC.toggleText(pet.checked)}}</button></td>
+                            <td><button ng-click="PC.update(pet)">Update</button></td>
                             <td><button ng-click="PC.removePet(pet.id)">Delete</button></td>
+                            <td><button ng-click="PC.checkPet(pet)">{{PC.toggleText(pet.checked)}}</button></td>
                         </tr>
                     </tbody>
                 </table>

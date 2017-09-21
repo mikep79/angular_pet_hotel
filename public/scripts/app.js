@@ -5,6 +5,30 @@ myApp.controller('PetController', function($http){
     console.log('NG');
     var vm = this;
     vm.pets = [];
+    vm.owners = ['Alicia', 'Xiong', 'Mike', 'Katie']
+    vm.addOwner = function() {
+        $http({
+            method: 'POST',
+            url: '/owners',
+            data: {
+                first: vm.first_name,
+                last: vm.last_name
+            }
+        }).then(function(res) {
+            console.log('at addOwner success', res)
+        })
+    }
+    vm.getOwners = function(){
+        $http({
+            method: 'GET',
+            url: '/owners',
+        }).then(function(res){
+            vm.owners = res.data.map(function(element) {
+                return element.first_name + ' ' + element.last_name;
+            }, this);;
+        });
+    }
+    vm.getOwners();
 
     vm.toggleText= function (checked) {
         if (checked) {
