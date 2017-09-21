@@ -1,15 +1,32 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('PetController', function($http){
+    
     console.log('NG');
     var vm = this;
+    vm.pets = [];
     vm.getPets = function(){
         $http({
             method: 'GET',
             url: '/pets',
         }).then(function(res){
-            console.log('server response:', res.data);
+            vm.pets = res.data;
         });
     }
     vm.getPets();
+
+    vm.addPet = function(){
+        $http({
+            method: 'POST',
+            url: '/pets',
+            data: {
+                name: vm.name,
+                breed: vm.breed,
+                color: vm.color,
+                checked: vm.checked
+            }
+        }).then(function(res) {
+            vm.getPets();
+        })
+    }
 });
