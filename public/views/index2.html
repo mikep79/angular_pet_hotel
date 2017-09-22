@@ -11,15 +11,9 @@
 </head>
 
 <body ng-app='myApp'>
-    <h1>Pets</h1>
+
     <main ng-controller='PetController as PC'>
-        <section id="checkIn">
-            <h2>Pet Check In</h2>
-                <select ng-model="PC.selected_pet">
-                    <option ng-repeat="pet in PC.pets">{{ pet.id + ' ' + pet.name }}</option>
-                </select>
-            <button ng-click="PC.checkPet()">Check In</button>
-        </section>
+            <h1>Pet Hotel</h1>
         <section id="ownerRegistration">
             <h2>Owner Registration</h2>
             <input type="text" id="ownerFirst" placeholder="First Name" ng-model="PC.first_name">
@@ -34,21 +28,19 @@
                     <thead>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Update</th>
                         <th>Delete</th>
                     </thead>
                     <tbody>
                         <tr ng-repeat='owner in PC.owners'>
                             <td>{{owner.first_name}}</td>
                             <td>{{owner.last_name}}</td>
-                            <td><button>Update</button></td>
                             <td><button ng-click='PC.removeOwner(owner.id)'>Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
         </section>
+
         <section id="newPets">
             <h2>Pets</h2>
             <div id="inputDiv">
@@ -58,37 +50,57 @@
                 <input type="text" , id="nameIn" , placeholder="Name" ng-model="PC.name">
                 <input type="text" , id="breedIn" , placeholder="Breed" ng-model="PC.breed">
                 <input type="text" , id="colorIn" , placeholder="Color" ng-model="PC.color">
-                <input type="text" , id="checkedIn" , placeholder="Check In" ng-model="PC.checked">
                 <button id="addButton" ng-click="PC.addPet()">Add</button>
             </div>
+            <div id="displayDiv">
+                    <table id="petList">
+                        <thead>
+                            <th>Owner</th>
+                            <th>Name</th>
+                            <th>Breed</th>
+                            <th>Color</th>
+                            <th>Delete</th>
+                        </thead>
+                        <tbody id="allPets">
+                            <tr ng-repeat="pet in PC.pets">
+                                <td>{{pet.first_name}}</td>
+                                <td>{{pet.name}}</td>
+                                <td>{{pet.breed}}</td>
+                                <td>{{pet.color}}</td>
+                                <td><button ng-click="PC.removePet(pet.id)">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
         </section>
-        <div id="displayDiv">
-            <table id="petList">
-                <thead>
-                    <th>Owner</th>
-                    <th>Name</th>
-                    <th>Breed</th>
-                    <th>Color</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </thead>
-                <tbody id="allPets">
-                    <tr ng-repeat="pet in PC.pets">
-                        <td>{{pet.first_name}}</td>
-                        <td>{{pet.name}}</td>
-                        <td>{{pet.breed}}</td>
-                        <td>{{pet.color}}</td>
-                        <td><button ng-click="PC.update(pet)">Update</button></td>
-                        <td><button ng-click="PC.removePet(pet.id)">Delete</button></td>
 
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <section id="checkIn">
+                <h2>Pet Check In</h2>
+                <select ng-model="PC.selected_pet" ng-change="PC.displayHistory()">
+                        <option ng-repeat="pet in PC.pets">{{ pet.id + ' ' + pet.name }}</option>
+                    </select>
+                <button ng-click="PC.checkPet()">Check In</button>
+                <div ng-hide="PC.hideHistory">
+                    <table>
+                        <thead>
+                            <th>Name</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="visit in PC.visits">
+                                <td>{{visit.name}}</td>
+                                <td>{{visit.check_in}}</td>
+                                <td>{{visit.check_out}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-        <br>
+                </div>
+            </section>
 
         <section>
+            <h2>Pet Check Out</h2>
             <div id='checkField'>
                 <table>
                     <thead>
@@ -106,6 +118,7 @@
                 </table>
             </div>
         </section>
+        
 
     </main>
 

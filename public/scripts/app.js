@@ -7,7 +7,9 @@ myApp.controller('PetController', function ($http) {
     vm.pets = [];
     vm.owners = [];
     vm.checked_in_pets = [];
+    vm.visits = [];
     vm.hideOwners = true;
+    vm.hideHistory = true;
     vm.showOwnersButtonText = "Show Owners"
     
     vm.addOwner = function () {
@@ -117,7 +119,8 @@ myApp.controller('PetController', function ($http) {
                 pet_id: idString
             }
         }).then(function (res) {
-            vm.getPets();
+            //vm.getPets();
+            vm.getCheckedPets();
         });
     };
     
@@ -145,6 +148,18 @@ myApp.controller('PetController', function ($http) {
             vm.getCheckedPets();
         })
     }
+
+
+    vm.displayHistory = function() {
+        var idString = parseInt(vm.selected_pet.split(' ')[0]);
+        $http({
+            method: 'GET',
+            url: '/visits/pet/' + idString,
+        }).then(function(res) {
+            vm.visits = res.data;
+            vm.hideHistory = false;
+        })
+    };
 
     vm.getCheckedPets();
     vm.getOwners();

@@ -63,4 +63,26 @@ router.put('/:id', function (req, res) {
         }
     })
 });
+
+router.get('/pet/:id', function(req, res){
+    var petId = req.params.id;
+
+    pool.connect(function(conErr, client, done){
+        if (conErr){
+            console.log('Visits.js conErr: ', conErr);
+            res.sendStatus(500);
+        } else {
+            var queryString = 'SELECT visits.id, visits.check_in, visits.check_out, visits.pet_id, pets.name FROM visits JOIN pets ON visits.pet_id = pets.id  WHERE visits.pet_id = $1;';
+            client.query(queryString, [petId], function(queryErr, resultObj){
+                done();
+                if (queryErr){
+                    res.sendStatus(500);
+                } else {
+                    res.send(resultObj.rows);
+                }
+            });
+        }
+    });
+});
+
 module.exports = router;

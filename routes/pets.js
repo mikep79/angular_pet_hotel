@@ -55,7 +55,7 @@ router.post('/', function (req, res) {
 
 router.delete('/:id', function(req,res){
     var petId= req.params.id;
-
+    console.log('petId in delete pet route: ', petId);
     pool.connect(function (conErr, client, done){
         if (conErr){
             console.log(conErr);
@@ -64,6 +64,7 @@ router.delete('/:id', function(req,res){
             client.query('DELETE FROM pets WHERE id = $1;', [petId], function(queryErr, result){
                 done();
                 if(queryErr){
+                    console.log('you broke it at the queryError');
                     res.sendStatus(500);
                 } else {
                     res.sendStatus(202);
