@@ -20,6 +20,8 @@ myApp.controller('PetController', function ($http) {
             console.log('at addOwner success', res);
             vm.first_name = '';
             vm.last_name = '';
+            vm.getOwners();
+            vm.getPets();
         });
     };
 
@@ -98,16 +100,22 @@ myApp.controller('PetController', function ($http) {
         });
     };
 
-    vm.checkPet = function (pet) {
-        pet.checked = !pet.checked;
+    vm.checkPet = function () {
+        console.log(vm.selected_pet);
+        var idString = parseInt(vm.selected_pet.split(' ')[0]);
+        console.log('idString: ', idString);
         $http({
-            method: 'PUT',
-            url: '/pets/' + pet.id,
-            data: pet
+            method: 'POST',
+            url: '/visits',
+            data: {
+                pet_id: idString
+            }
         }).then(function (res) {
             vm.getPets();
         });
     };
+
+    
     vm.getOwners();
     vm.getPets();
 });

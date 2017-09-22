@@ -6,6 +6,7 @@ var app = express();
 var index = require('./routes/index');
 var pets = require('./routes/pets');
 var owners = require('./routes/owners');
+var visits = require('./routes/visits');
 
 app.listen(port, function() {
     console.log('listening on port: ', port);
@@ -16,4 +17,5 @@ app.use(express.static('public'));
 app.use('/', index);
 app.use('/pets', pets);
 app.use('/owners', owners);
+app.use('/visits', visits);
 

@@ -13,6 +13,13 @@
 <body ng-app='myApp'>
     <h1>Pets</h1>
     <main ng-controller='PetController as PC'>
+        <section id="checkIn">
+            <h2>Pet Check In</h2>
+                <select ng-model="PC.selected_pet">
+                    <option ng-repeat="pet in PC.pets">{{ pet.id + ' ' + pet.name }}</option>
+                </select>
+            <button ng-click="PC.checkPet()">Check In</button>
+        </section>
         <section id="ownerRegistration">
             <h2>Owner Registration</h2>
             <input type="text" id="ownerFirst" placeholder="First Name" ng-model="PC.first_name">
@@ -51,7 +58,7 @@
                 <input type="text" , id="nameIn" , placeholder="Name" ng-model="PC.name">
                 <input type="text" , id="breedIn" , placeholder="Breed" ng-model="PC.breed">
                 <input type="text" , id="colorIn" , placeholder="Color" ng-model="PC.color">
-                <input type="text" , id="checkedIn" , placeholder="Checked In?" ng-model="PC.checked">
+                <input type="text" , id="checkedIn" , placeholder="Check In" ng-model="PC.checked">
                 <button id="addButton" ng-click="PC.addPet()">Add</button>
             </div>
         </section>
@@ -74,7 +81,7 @@
                         <td>{{pet.color}}</td>
                         <td><button ng-click="PC.update(pet)">Update</button></td>
                         <td><button ng-click="PC.removePet(pet.id)">Delete</button></td>
-                        <td><button ng-click="PC.checkPet(pet)">{{PC.toggleText(pet.checked)}}</button></td>
+
                     </tr>
                 </tbody>
             </table>
