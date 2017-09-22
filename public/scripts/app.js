@@ -72,10 +72,14 @@ myApp.controller('PetController', function ($http) {
     };
 
     vm.addPet = function () {
+        var ownerId = parseInt(vm.selected_owner.split(' ')[0]);
+        console.log('ownerId : ', ownerId);
+        
         $http({
             method: 'POST',
             url: '/pets',
             data: {
+                owner_id: ownerId,
                 name: vm.name,
                 breed: vm.breed,
                 color: vm.color,
@@ -114,7 +118,6 @@ myApp.controller('PetController', function ($http) {
             vm.getPets();
         });
     };
-
     
     vm.getOwners();
     vm.getPets();

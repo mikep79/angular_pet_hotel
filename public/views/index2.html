@@ -52,8 +52,8 @@
         <section id="newPets">
             <h2>Pets</h2>
             <div id="inputDiv">
-                <select>
-                    <option ng-repeat="owner in PC.owners">{{ owner.first_name + ' ' + owner.last_name }}</option>
+                <select ng-model="PC.selected_owner">
+                    <option ng-repeat="owner in PC.owners">{{ owner.id + ' ' + owner.first_name + ' ' + owner.last_name }}</option>
                 </select>
                 <input type="text" , id="nameIn" , placeholder="Name" ng-model="PC.name">
                 <input type="text" , id="breedIn" , placeholder="Breed" ng-model="PC.breed">
@@ -71,7 +71,6 @@
                     <th>Color</th>
                     <th>Update</th>
                     <th>Delete</th>
-                    <th>Check In/Out</th>
                 </thead>
                 <tbody id="allPets">
                     <tr ng-repeat="pet in PC.pets">
@@ -86,6 +85,27 @@
                 </tbody>
             </table>
         </div>
+
+        <br>
+
+        <section>
+            <div id='checkField'>
+                <table>
+                    <thead>
+                        <th>Pet Name //</th>
+                        <th>Date/Time //</th>
+                        <th>Check Out</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><button>Check Out</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
     </main>
 

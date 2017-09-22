@@ -32,16 +32,25 @@ router.post('/', function (req, res) {
             res.sendStatus(500);
         } else {
             console.log('no connection error');
-            client.query('INSERT INTO pets (name, breed, color, checked) VALUES ($1,$2,$3,$4)', [newPet.name, newPet.breed, newPet.color, newPet.checked], function(queryErr, resultObj) {
-                done();
+            var queryString = 'INSERT INTO pets (name, breed, color, checked) VALUES ($1,$2,$3,$4) RETURNING id';
+            client.query(queryString, [newPet.name, newPet.breed, newPet.color, newPet.checked], function(queryErr, resultObj) {
+                console.log('Pets.js resultObj: ', resultObj);
                 if (queryErr) {
                     res.sendStatus(500)
                  } else {
-                    res.sendStatus(201)
+                    var queryString2 = 'INSERT INTO owners_pets (owner_id, pet_id) VALUES ($1, $2)'; 
+                    client.query(queryString2, [newPet.owner_id, resultObj.rows[0].id], function(queryErr, resultObj){
+                        done();
+                        if (queryErr){
+                            res.sendStatus(500);
+                        } else {
+                            res.sendStatus(202);
+                        }
+                    });
                  }
             });
         }
-    })
+    });
 });
 
 router.delete('/:id', function(req,res){
