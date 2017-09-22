@@ -26,3 +26,22 @@ pet_id INT,
 FOREIGN KEY (owner_id) REFERENCES owners(id),
 FOREIGN KEY (pet_id) REFERENCES pets(id)
 );
+
+-- To add DELETE CASCADE: first must remove original fk constraint, then add back with delete cascade
+ALTER TABLE owners_pets 
+DROP CONSTRAINT owner_id 
+FOREIGN KEY (owner_id) REFERENCES owners(id);
+
+ALTER TABLE
+ADD CONSTRAINT owner_id 
+FOREIGN KEY (owner_id) REFERENCES owners(id)
+ON DELETE CASCADE;
+
+ALTER TABLE owners_pets 
+DROP CONSTRAINT pet_id 
+FOREIGN KEY (pet_id) REFERENCES pets(id);
+
+ALTER TABLE
+ADD CONSTRAINT pet_id 
+FOREIGN KEY (pet_id) REFERENCES pets(id)
+ON DELETE CASCADE;

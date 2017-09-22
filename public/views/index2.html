@@ -18,9 +18,9 @@
             <input type="text" id="ownerFirst" placeholder="First Name" ng-model="PC.first_name">
             <input type="text" id="ownerFirst" placeholder="Last Name" ng-model="PC.last_name">
             <button id="registerButton" ng-click="PC.addOwner()">Register</button>
-            <button id='showOwnersButton' ng-click="PC.showOwners()">Show Owners</button>
+            <button id='showOwnersButton' ng-click="PC.toggleOwners()">{{ PC.showOwnersButtonText}}</button>
         </section>
-        <section id="ownerDisplayField">
+        <section id="ownerDisplayField" ng-hide="PC.hideOwners">
             <div>
                 <h2>Owners</h2>
                 <table>

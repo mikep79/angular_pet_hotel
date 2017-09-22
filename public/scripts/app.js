@@ -6,6 +6,8 @@ myApp.controller('PetController', function ($http) {
     var vm = this;
     vm.pets = [];
     vm.owners = [];
+    vm.hideOwners = true;
+    vm.showOwnersButtonText = "Show Owners"
     vm.addOwner = function () {
         $http({
             method: 'POST',
@@ -37,8 +39,18 @@ myApp.controller('PetController', function ($http) {
             url: '/owners/' + ownerId,
         }).then(function (res) {
             vm.getOwners();
+            vm.getPets();
         });
     };
+
+    vm.toggleOwners = function() {
+        vm.hideOwners = !vm.hideOwners;
+        if (vm.hideOwners) {
+            vm.showOwnersButtonText = "Show Owners"
+        } else {
+            vm.showOwnersButtonText = "Hide Owners"
+        }
+    }
 
     vm.toggleText = function (checked) {
         if (checked) {
