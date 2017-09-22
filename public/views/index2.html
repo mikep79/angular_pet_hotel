@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,54 +9,79 @@
     <script src="vendors/angular.min.js"></script>
     <script src="scripts/app.js"></script>
 </head>
+
 <body ng-app='myApp'>
-        <h1>Pets</h1>
-        <main ng-controller='PetController as PC'>
-            <section id="ownerRegistration">
-                <h2>Owner Registration</h2>
-                <input type="text" id="ownerFirst" placeholder="First Name" ng-model="PC.first_name">
-                <input type="text" id="ownerFirst" placeholder="Last Name" ng-model="PC.last_name">
-                <button id="registerButton" ng-click="PC.addOwner()">Register</button>
-                </section>
-            <section id="newPets">
-                <h2>Pets</h2>
-            <div id="inputDiv">
-                <select>
-                    <option ng-repeat="owner in PC.owners">{{ owner }}</option>
-                </select>
-                <input type="text", id="nameIn", placeholder="Name" ng-model="PC.name">
-                <input type="text", id="breedIn", placeholder="Breed" ng-model="PC.breed">
-                <input type="text", id="colorIn", placeholder="Color" ng-model="PC.color">
-                <input type="text", id="checkedIn", placeholder="Checked In?" ng-model="PC.checked">
-                <button id="addButton" ng-click="PC.addPet()">Add</button>
-            </div>
-            </section>
-            <div id="displayDiv">
-                <table id="petList">
+    <h1>Pets</h1>
+    <main ng-controller='PetController as PC'>
+        <section id="ownerRegistration">
+            <h2>Owner Registration</h2>
+            <input type="text" id="ownerFirst" placeholder="First Name" ng-model="PC.first_name">
+            <input type="text" id="ownerFirst" placeholder="Last Name" ng-model="PC.last_name">
+            <button id="registerButton" ng-click="PC.addOwner()">Register</button>
+            <button id='showOwnersButton' ng-click="PC.showOwners()">Show Owners</button>
+        </section>
+        <section id="ownerDisplayField">
+            <div>
+                <h2>Owners</h2>
+                <table>
                     <thead>
-                        <th>Owner</th>
-                        <th>Name</th>
-                        <th>Breed</th>
-                        <th>Color</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Update</th>
                         <th>Delete</th>
-                        <th>Check In/Out</th>
                     </thead>
-                    <tbody id="allPets">
-                        <tr ng-repeat="pet in PC.pets">
-                            <td>{{pet.first_name}}</td>
-                            <td>{{pet.name}}</td>
-                            <td>{{pet.breed}}</td>
-                            <td>{{pet.color}}</td>
-                            <td><button ng-click="PC.update(pet)">Update</button></td>
-                            <td><button ng-click="PC.removePet(pet.id)">Delete</button></td>
-                            <td><button ng-click="PC.checkPet(pet)">{{PC.toggleText(pet.checked)}}</button></td>
+                    <tbody>
+                        <tr ng-repeat='owner in PC.owners'>
+                            <td>{{owner.first_name}}</td>
+                            <td>{{owner.last_name}}</td>
+                            <td><button>Update</button></td>
+                            <td><button ng-click='PC.removeOwner(owner.id)'>Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        
+
+        </section>
+        <section id="newPets">
+            <h2>Pets</h2>
+            <div id="inputDiv">
+                <select>
+                    <option ng-repeat="owner in PC.owners">{{ owner.first_name + ' ' + owner.last_name }}</option>
+                </select>
+                <input type="text" , id="nameIn" , placeholder="Name" ng-model="PC.name">
+                <input type="text" , id="breedIn" , placeholder="Breed" ng-model="PC.breed">
+                <input type="text" , id="colorIn" , placeholder="Color" ng-model="PC.color">
+                <input type="text" , id="checkedIn" , placeholder="Checked In?" ng-model="PC.checked">
+                <button id="addButton" ng-click="PC.addPet()">Add</button>
+            </div>
+        </section>
+        <div id="displayDiv">
+            <table id="petList">
+                <thead>
+                    <th>Owner</th>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Color</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                    <th>Check In/Out</th>
+                </thead>
+                <tbody id="allPets">
+                    <tr ng-repeat="pet in PC.pets">
+                        <td>{{pet.first_name}}</td>
+                        <td>{{pet.name}}</td>
+                        <td>{{pet.breed}}</td>
+                        <td>{{pet.color}}</td>
+                        <td><button ng-click="PC.update(pet)">Update</button></td>
+                        <td><button ng-click="PC.removePet(pet.id)">Delete</button></td>
+                        <td><button ng-click="PC.checkPet(pet)">{{PC.toggleText(pet.checked)}}</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </main>
-    
+
 </body>
+
 </html>

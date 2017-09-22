@@ -45,14 +45,14 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/:id', function(req,res){
-    var dbId= req.params.id;
+    var petId= req.params.id;
 
     pool.connect(function (conErr, client, done){
         if (conErr){
             console.log(conErr);
             res.sendStatus(500);
         } else {
-            client.query('DELETE FROM pets WHERE id = $1;', [dbId], function(queryErr, result){
+            client.query('DELETE FROM pets WHERE id = $1;', [petId], function(queryErr, result){
                 done();
                 if(queryErr){
                     res.sendStatus(500);
@@ -62,7 +62,8 @@ router.delete('/:id', function(req,res){
             }) ;
         }
     }
-)});
+)}
+);
 
 router.put('/:id', function (req, res) {
     console.log('in the pets post', req.body);

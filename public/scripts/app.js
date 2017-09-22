@@ -1,12 +1,12 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('PetController', function($http){
-    
+myApp.controller('PetController', function ($http) {
+
     console.log('NG');
     var vm = this;
     vm.pets = [];
-    vm.owners = ['Alicia', 'Xiong', 'Mike', 'Katie']
-    vm.addOwner = function() {
+    vm.owners = [];
+    vm.addOwner = function () {
         $http({
             method: 'POST',
             url: '/owners',
@@ -14,25 +14,33 @@ myApp.controller('PetController', function($http){
                 first: vm.first_name,
                 last: vm.last_name
             }
-        }).then(function(res) {
+        }).then(function (res) {
             console.log('at addOwner success', res);
             vm.first_name = '';
             vm.last_name = '';
-        })
-    }
-    vm.getOwners = function(){
+        });
+    };
+
+    vm.getOwners = function () {
         $http({
             method: 'GET',
             url: '/owners',
-        }).then(function(res){
-            vm.owners = res.data.map(function(element) {
-                return element.first_name + ' ' + element.last_name;
-            }, this);;
+        }).then(function (res) {
+            vm.owners = res.data;
         });
-    }
-    vm.getOwners();
+    };
 
-    vm.toggleText= function (checked) {
+    vm.removeOwner = function (ownerId) {
+        console.log('owner id:', ownerId);
+        $http({
+            method: 'DELETE',
+            url: '/owners/' + ownerId,
+        }).then(function (res) {
+            vm.getOwners();
+        });
+    };
+
+    vm.toggleText = function (checked) {
         if (checked) {
             return 'Check Out';
         } else {
@@ -40,17 +48,16 @@ myApp.controller('PetController', function($http){
         }
     };
 
-    vm.getPets = function(){
+    vm.getPets = function () {
         $http({
             method: 'GET',
             url: '/pets',
-        }).then(function(res){
+        }).then(function (res) {
             vm.pets = res.data;
         });
-    }
-    vm.getPets();
+    };
 
-    vm.addPet = function(){
+    vm.addPet = function () {
         $http({
             method: 'POST',
             url: '/pets',
@@ -60,33 +67,35 @@ myApp.controller('PetController', function($http){
                 color: vm.color,
                 checked: vm.checked
             }
-        }).then(function(res) {
+        }).then(function (res) {
             vm.getPets();
             vm.name = '';
             vm.breed = '';
             vm.color = '';
             vm.checked = '';
-        })
-    }
+        });
+    };
 
-    vm.removePet = function(petId){
+    vm.removePet = function (petId) {
         console.log('pet id:', petId);
         $http({
             method: 'DELETE',
             url: '/pets/' + petId,
-        }).then(function(res) {
+        }).then(function (res) {
             vm.getPets();
-        })
-    }
+        });
+    };
 
-    vm.checkPet = function(pet){
+    vm.checkPet = function (pet) {
         pet.checked = !pet.checked;
         $http({
             method: 'PUT',
             url: '/pets/' + pet.id,
             data: pet
-        }).then(function(res){
+        }).then(function (res) {
             vm.getPets();
-        })
-    }
+        });
+    };
+    vm.getOwners();
+    vm.getPets();
 });

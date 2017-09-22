@@ -44,4 +44,25 @@ router.post('/', function (req, res) {
     })
 });
 
+router.delete('/:id', function(req,res){
+    var ownerId= req.params.id;
+
+    pool.connect(function (conErr, client, done){
+        if (conErr){
+            console.log(conErr);
+            res.sendStatus(500);
+        } else {
+            client.query('DELETE FROM owners WHERE id = $1;', [ownerId], function(queryErr, result){
+                done();
+                if(queryErr){
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(202);
+                }
+            }) ;
+        }
+    }
+)}
+);
+
 module.exports = router;
