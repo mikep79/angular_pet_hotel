@@ -15,7 +15,9 @@ myApp.controller('PetController', function($http){
                 last: vm.last_name
             }
         }).then(function(res) {
-            console.log('at addOwner success', res)
+            console.log('at addOwner success', res);
+            vm.first_name = '';
+            vm.last_name = '';
         })
     }
     vm.getOwners = function(){
@@ -60,6 +62,10 @@ myApp.controller('PetController', function($http){
             }
         }).then(function(res) {
             vm.getPets();
+            vm.name = '';
+            vm.breed = '';
+            vm.color = '';
+            vm.checked = '';
         })
     }
 
