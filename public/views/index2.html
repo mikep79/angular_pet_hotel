@@ -92,14 +92,14 @@
             <div id='checkField'>
                 <table>
                     <thead>
-                        <th>Pet Name //</th>
-                        <th>Date/Time //</th>
+                        <th>Pet Name</th>
+                        <th>Check in Date</th>
                         <th>Check Out</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
+                        <tr ng-repeat='pet in PC.checked_in_pets'>
+                            <td>{{ pet.name }} </td>
+                            <td>{{ pet.check_in }}</td>
                             <td><button>Check Out</button></td>
                         </tr>
                     </tbody>

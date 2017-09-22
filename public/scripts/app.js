@@ -6,8 +6,10 @@ myApp.controller('PetController', function ($http) {
     var vm = this;
     vm.pets = [];
     vm.owners = [];
+    vm.checked_in_pets = [];
     vm.hideOwners = true;
     vm.showOwnersButtonText = "Show Owners"
+    
     vm.addOwner = function () {
         $http({
             method: 'POST',
@@ -119,6 +121,17 @@ myApp.controller('PetController', function ($http) {
         });
     };
     
+    vm.getCheckedPets = function(){
+        $http({
+            method: 'GET',
+            url: '/visits',
+        }).then(function(res){
+            console.log('getCheckedPets res: ', res.data);
+            vm.checked_in_pets = res.data;
+        });
+    };
+
+    vm.getCheckedPets();
     vm.getOwners();
     vm.getPets();
 });
