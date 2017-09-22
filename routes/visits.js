@@ -28,7 +28,7 @@ router.get('/', function(req, res){
             console.log('Visits.js conErr: ', conErr);
             res.sendStatus(500);
         } else {
-            var queryString = 'SELECT * FROM visits JOIN pets ON visits.pet_id = pets.id  WHERE visits.check_out IS NULL;';
+            var queryString = 'SELECT visits.id, visits.check_in, visits.check_out, visits.pet_id, pets.name FROM visits JOIN pets ON visits.pet_id = pets.id  WHERE visits.check_out IS NULL;';
             client.query(queryString, function(queryErr, resultObj){
                 done();
                 if (queryErr){
@@ -41,4 +41,26 @@ router.get('/', function(req, res){
     });
 });
 
+router.put('/:id', function (req, res) {
+    console.log('in the visits PUT: ', req.body);
+    var newCheckout = req.body;
+    var visitId = req.params.id;
+    pool.connect(function (conErr, client, done){
+        if (conErr){
+            console.log(conErr);
+            res.sendStatus(500);
+        } else {
+            console.log('no connection error');
+            var queryString = 'UPDATE visits SET check_in = $1, check_out = NOW(), pet_id = $2 WHERE id = $3;';
+            client.query(queryString, [newCheckout.check_in, newCheckout.pet_id, visitId], function(queryErr, resultObj) {
+                done();
+                if (queryErr) {
+                    res.sendStatus(500)
+                 } else {
+                    res.sendStatus(201)
+                 }
+            });
+        }
+    })
+});
 module.exports = router;

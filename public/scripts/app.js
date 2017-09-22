@@ -131,6 +131,21 @@ myApp.controller('PetController', function ($http) {
         });
     };
 
+    vm.checkoutPet = function(visit) {
+        var id = visit.id;
+        $http({
+            method: 'PUT',
+            url: '/visits/' + id,
+            data: {
+                check_in: visit.check_in,
+                check_out: visit.check_out,
+                pet_id: visit.pet_id
+            }
+        }).then(function(res) {
+            vm.getCheckedPets();
+        })
+    }
+
     vm.getCheckedPets();
     vm.getOwners();
     vm.getPets();
